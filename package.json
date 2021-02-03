@@ -30,7 +30,7 @@
     }
   },
   "lint-staged": {
-    "*.ts{x}": ["yarn lint:fix", "git add"]
+    "*.ts, *.tsx": ["yarn lint:fix"]
   },
   "eslintConfig": {
     "extends": [
