@@ -20,11 +20,7 @@ const INITIAL_VALUE = [
   },
 ];
 
-const initialProducts = [
-  Product.of(INITIAL_VALUE[0]),
-  Product.of(INITIAL_VALUE[1]),
-  Product.of(INITIAL_VALUE[2]),
-];
+const initialProducts = INITIAL_VALUE.map((value) => Product.of(value));
 
 describe('ProductRepository', () => {
   test('should be able to create a repository', () => {
