@@ -1,6 +1,6 @@
 import ProductRepository from '.';
 import Product from '../Product';
-import DECIMAL_PRECISION from '../Quantity/decimalPrecision';
+import DECIMAL_PRECISION from '../Money/decimalPrecision';
 
 const INITIAL_VALUE = [
   {

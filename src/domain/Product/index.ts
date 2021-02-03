@@ -1,4 +1,4 @@
-import Quantity from '../Quantity';
+import Money from '../Money';
 
 export interface ProductProps {
   code: string,
@@ -11,7 +11,7 @@ class Product {
 
   name: string;
 
-  price: Quantity;
+  price: Money;
 
   static of(props: ProductProps): Product {
     return new Product(props);
@@ -20,7 +20,7 @@ class Product {
   constructor({ code, name, price }: ProductProps) {
     this.code = code;
     this.name = name;
-    this.price = Quantity.of(price);
+    this.price = Money.of(price);
   }
 
   render(): ProductProps {
