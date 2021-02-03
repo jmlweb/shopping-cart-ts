@@ -1,0 +1,5 @@
+const DECIMAL_PLACES = 2;
+
+const DECIMAL_PRECISION = 10 ** DECIMAL_PLACES;
+
+export default DECIMAL_PRECISION;
