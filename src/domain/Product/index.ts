@@ -1,6 +1,6 @@
 import Quantity from '../Quantity';
 
-interface Props {
+export interface ProductProps {
   code: string,
   name: string,
   price: number
@@ -13,14 +13,22 @@ class Product {
 
   price: Quantity;
 
-  static of(props: Props): Product {
+  static of(props: ProductProps): Product {
     return new Product(props);
   }
 
-  constructor({ code, name, price }: Props) {
+  constructor({ code, name, price }: ProductProps) {
     this.code = code;
     this.name = name;
     this.price = Quantity.of(price);
+  }
+
+  render(): ProductProps {
+    return {
+      code: this.code,
+      name: this.name,
+      price: this.price.formattedValue,
+    };
   }
 }
 
