@@ -1,10 +1,16 @@
 import CartItem from '../CartItem';
-import Product from '../Product';
+import Product, { ProductProps } from '../Product';
 import Money from '../Money';
 
-class CartItemRepository {
-  static of(cartItems?: ReadonlyArray<CartItem>): CartItemRepository {
-    return new CartItemRepository(cartItems);
+type CartItemsProps = {
+  product: ProductProps;
+  quantity: number;
+  total: number;
+};
+
+class CartItems {
+  static of(cartItems?: ReadonlyArray<CartItem>): CartItems {
+    return new CartItems(cartItems);
   }
 
   cartItems: ReadonlyArray<CartItem>;
@@ -20,7 +26,7 @@ class CartItemRepository {
     );
   }
 
-  incrementQuantity(product: Product, quantity: number): CartItemRepository {
+  incrementQuantity(product: Product, quantity: number): CartItems {
     if (this.hasProductInCart(product)) {
       const newCartItems = this.cartItems.map((cartItem) => {
         if (cartItem.hasProduct(product)) {
@@ -28,16 +34,13 @@ class CartItemRepository {
         }
         return cartItem;
       });
-      return CartItemRepository.of(newCartItems);
+      return CartItems.of(newCartItems);
     }
-    const newCartItems = [
-      ...this.cartItems,
-      CartItem.of(product, quantity),
-    ];
-    return CartItemRepository.of(newCartItems);
+    const newCartItems = [...this.cartItems, CartItem.of(product, quantity)];
+    return CartItems.of(newCartItems);
   }
 
-  decrementQuantity(product: Product, quantity: number): CartItemRepository {
+  decrementQuantity(product: Product, quantity: number): CartItems {
     if (!this.hasProductInCart(product)) {
       throw new Error('Product not found');
     }
@@ -51,20 +54,22 @@ class CartItemRepository {
       }
       return [...acc, cartItem];
     }, [] as ReadonlyArray<CartItem>);
-    return CartItemRepository.of(newCartItems);
+    return CartItems.of(newCartItems);
   }
 
-  removeProduct(product: Product): CartItemRepository {
+  removeProduct(product: Product): CartItems {
     if (!this.hasProductInCart(product)) {
       throw new Error('Product not found');
     }
-    const newCartItems = this.cartItems.filter((cartItem) => !cartItem.hasProduct(product));
-    return CartItemRepository.of(newCartItems);
+    const newCartItems = this.cartItems.filter(
+      (cartItem) => !cartItem.hasProduct(product),
+    );
+    return CartItems.of(newCartItems);
   }
 
   // eslint-disable-next-line class-methods-use-this
-  empty(): CartItemRepository {
-    return CartItemRepository.of();
+  empty(): CartItems {
+    return CartItems.of();
   }
 
   findByProduct(product: Product): CartItem {
@@ -75,12 +80,23 @@ class CartItemRepository {
     return result;
   }
 
+  render(): ReadonlyArray<CartItemsProps> {
+    return this.cartItems.map((cartItem) => ({
+      product: cartItem.product.render(),
+      quantity: cartItem.quantity,
+      total: cartItem.total.formattedValue,
+    }));
+  }
+
   get isEmpty(): boolean {
     return this.cartItems.length === 0;
   }
 
   get total(): Money {
-    const rawValue = this.cartItems.reduce((acc, cartItem) => acc + cartItem.total.value, 0);
+    const rawValue = this.cartItems.reduce(
+      (acc, cartItem) => acc + cartItem.total.value,
+      0,
+    );
     return Money.of(rawValue);
   }
 
@@ -89,4 +105,4 @@ class CartItemRepository {
   }
 }
 
-export default CartItemRepository;
+export default CartItems;
