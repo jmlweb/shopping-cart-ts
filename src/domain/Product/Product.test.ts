@@ -18,4 +18,10 @@ describe('Product', () => {
       price: 20,
     });
   });
+
+  test('should be able to compare products by code', () => {
+    const product1 = Product.of(INITIAL_VALUE);
+    const product2 = Product.of(INITIAL_VALUE);
+    expect(product1.isSameThan(product2)).toBe(true);
+  });
 });

@@ -23,6 +23,10 @@ class Product {
     this.price = Money.of(price);
   }
 
+  isSameThan(product: Product): boolean {
+    return this.code === product.code;
+  }
+
   render(): ProductProps {
     return {
       code: this.code,

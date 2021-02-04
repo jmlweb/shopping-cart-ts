@@ -42,7 +42,7 @@ describe('ProductRepository', () => {
   });
   test('should be able to delete an item, producing a new instance', () => {
     const productRepository = ProductRepository.of(initialProducts);
-    const newProductRepository = productRepository.removeProduct('SHIRT');
+    const newProductRepository = productRepository.removeProduct(initialProducts[2]);
     expect(newProductRepository.render()).toEqual([
       {
         ...INITIAL_VALUE[0],
@@ -71,24 +71,18 @@ describe('ProductRepository', () => {
     ]);
   });
   test('should be able to add an item', () => {
-    const productRepository = ProductRepository.of([
-      initialProducts[0],
-      initialProducts[1],
-    ]);
+    const productRepository = ProductRepository.of();
     const newProductRepository = productRepository.addProduct(initialProducts[2]);
     expect(newProductRepository.render()).toEqual([
-      {
-        ...INITIAL_VALUE[0],
-        price: 5,
-      },
-      {
-        ...INITIAL_VALUE[1],
-        price: 7.5,
-      },
       {
         ...INITIAL_VALUE[2],
         price: 20,
       },
     ]);
+  });
+  test('should be able to find by code', () => {
+    const productRepository = ProductRepository.of(initialProducts);
+    const result = productRepository.findByCode('CAP');
+    expect(result.isSameThan(initialProducts[0])).toBe(true);
   });
 });
