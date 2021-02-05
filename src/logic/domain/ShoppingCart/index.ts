@@ -15,10 +15,19 @@ type AppliedDiscount = {
 };
 
 /**
+ * The Shopping Cart is the core where the different parts work togheter:
+ * - Providing an interface to interact with the CartManager provided
+ * - Linking the Discounts and the current state of the CartManager to generate applied discounts
+ * - Calculating the total amount using the CartManager total and the applied discounts total
+ *
+ * NOTE:
  * This class overrides the provided instructions on purpose to make it agnostic.
  * In the instructions provided, the scan method is called with a product code, however,
  * in the future the product could be represented by an id, or any other data.
- * Thus the shopping cart method receives the Product when scanning, rejecting or droping an item.
+ * The other (even bigger) reason is that providing the code works only if the product is already
+ * included in the cart. Otherwise, we are creating a dependency with the product repository,
+ * to be able to retrieve the price of the product.
+ * Thus the scan method receives the whole Product when scanning, rejecting or droping an item.
  */
 
 class ShoppingCart {

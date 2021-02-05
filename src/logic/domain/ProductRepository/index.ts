@@ -1,6 +1,10 @@
 import ProductAdapter from './ProductAdapter';
 import Product, { ProductProps } from '../Product';
 
+/**
+ * The ProductRepository provides a way of interacting with the Product(s),
+ * without relying on the implementation, which is the responsability of the provided adapter
+ */
 class ProductRepository {
   adapter: ProductAdapter;
 
