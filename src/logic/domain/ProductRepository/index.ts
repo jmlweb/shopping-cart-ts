@@ -1,5 +1,5 @@
 import ProductAdapter from './ProductAdapter';
-import Product, { ProductProps, ProductId } from '../Product';
+import Product, { ProductProps } from '../Product';
 
 class ProductRepository {
   adapter: ProductAdapter;
@@ -8,7 +8,7 @@ class ProductRepository {
     this.adapter = adapter;
   }
 
-  get = async (id: ProductId): Promise<Product> => {
+  get = async (id: Product['code']): Promise<Product> => {
     const product = await this.adapter.get(id);
     if (!product) {
       throw new Error('Product not found');
