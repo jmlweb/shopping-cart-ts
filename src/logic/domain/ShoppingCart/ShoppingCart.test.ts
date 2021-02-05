@@ -4,7 +4,7 @@ import DECIMAL_PRECISION from '../Money/decimalPrecision';
 import PercentDiscountFactory from '../Discount/PercentDiscountFactory';
 import TwoPerOneDiscountFactory from '../Discount/TwoPerOneDiscountFactory';
 import CartItem from '../CartItem';
-import CartItems from '../CartItems';
+import CartManager from '../CartManager';
 
 const RAW_PRODUCTS = [
   {
@@ -53,12 +53,12 @@ describe('Shopping Cart', () => {
       TwoPerOneDiscountFactory.of('2x1 cap offer', products[0]),
       PercentDiscountFactory.of('shirt offer', products[2], 5, 3),
     ];
-    const cartItems = CartItems.of([
+    const cartManager = CartManager.of([
       CartItem.of(products[0], 4),
       CartItem.of(products[1], 4),
       CartItem.of(products[2], 3),
     ]);
-    const shoppingCart = ShoppingCart.of(discounts, cartItems);
+    const shoppingCart = ShoppingCart.of(discounts, cartManager);
 
     expect(shoppingCart.appliedDiscounts.length).toBe(2);
     // We have 4 units with a price of 5 and 2x1 discount

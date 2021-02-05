@@ -2,15 +2,15 @@ import CartItem from '../CartItem';
 import Product, { ProductProps } from '../Product';
 import Money from '../Money';
 
-type CartItemsProps = {
+type CartManagerProps = {
   product: ProductProps;
   quantity: number;
   total: number;
 };
 
-class CartItems {
-  static of(cartItems?: ReadonlyArray<CartItem>): CartItems {
-    return new CartItems(cartItems);
+class CartManager {
+  static of(cartItems?: ReadonlyArray<CartItem>): CartManager {
+    return new CartManager(cartItems);
   }
 
   cartItems: ReadonlyArray<CartItem>;
@@ -26,7 +26,7 @@ class CartItems {
     );
   }
 
-  incrementQuantity(product: Product, quantity: number): CartItems {
+  incrementQuantity(product: Product, quantity: number): CartManager {
     if (this.hasProductInCart(product)) {
       const newCartItems = this.cartItems.map((cartItem) => {
         if (cartItem.hasProduct(product)) {
@@ -34,13 +34,13 @@ class CartItems {
         }
         return cartItem;
       });
-      return CartItems.of(newCartItems);
+      return CartManager.of(newCartItems);
     }
     const newCartItems = [...this.cartItems, CartItem.of(product, quantity)];
-    return CartItems.of(newCartItems);
+    return CartManager.of(newCartItems);
   }
 
-  decrementQuantity(product: Product, quantity: number): CartItems {
+  decrementQuantity(product: Product, quantity: number): CartManager {
     if (!this.hasProductInCart(product)) {
       throw new Error('Product not found');
     }
@@ -54,22 +54,22 @@ class CartItems {
       }
       return [...acc, cartItem];
     }, [] as ReadonlyArray<CartItem>);
-    return CartItems.of(newCartItems);
+    return CartManager.of(newCartItems);
   }
 
-  removeProduct(product: Product): CartItems {
+  removeProduct(product: Product): CartManager {
     if (!this.hasProductInCart(product)) {
       throw new Error('Product not found');
     }
     const newCartItems = this.cartItems.filter(
       (cartItem) => !cartItem.hasProduct(product),
     );
-    return CartItems.of(newCartItems);
+    return CartManager.of(newCartItems);
   }
 
   // eslint-disable-next-line class-methods-use-this
-  empty(): CartItems {
-    return CartItems.of();
+  empty(): CartManager {
+    return CartManager.of();
   }
 
   findByProduct(product: Product): CartItem {
@@ -80,7 +80,7 @@ class CartItems {
     return result;
   }
 
-  render(): ReadonlyArray<CartItemsProps> {
+  render(): ReadonlyArray<CartManagerProps> {
     return this.cartItems.map((cartItem) => ({
       product: cartItem.product.render(),
       quantity: cartItem.quantity,
@@ -105,4 +105,4 @@ class CartItems {
   }
 }
 
-export default CartItems;
+export default CartManager;
