@@ -2,6 +2,11 @@ import Product from '../../domain/Product';
 import DECIMAL_PRECISION from '../../domain/Money/decimalPrecision';
 import ProductAdapter from '../../domain/ProductRepository/ProductAdapter';
 
+/**
+ * The ProductAdapter interface defines the behavior of the adapter
+ * We don't want to test the implementation here as it is a mock
+ */
+
 class ProductMockAdapter implements ProductAdapter {
   static data = [
     {

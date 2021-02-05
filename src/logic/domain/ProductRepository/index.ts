@@ -16,9 +16,7 @@ class ProductRepository {
     return product;
   };
 
-  list(): Promise<ReadonlyArray<Product>> {
-    return this.adapter.list();
-  }
+  list = (): Promise<ReadonlyArray<Product>> => this.adapter.list();
 
   render = async (): Promise<ReadonlyArray<ProductProps>> => {
     const products = await this.list();

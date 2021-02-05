@@ -1,5 +1,5 @@
 import Discount from '../Discount';
-import CartItems from '../CartItems/index';
+import CartManager from '../CartManager';
 import Money from '../Money';
 import Product from '../Product';
 
@@ -24,58 +24,58 @@ type AppliedDiscount = {
 class ShoppingCart {
   static of(
     discounts: ReadonlyArray<Discount>,
-    cartItems?: CartItems,
+    cartManager?: CartManager,
   ): ShoppingCart {
-    return new ShoppingCart(discounts, cartItems || CartItems.of([]));
+    return new ShoppingCart(discounts, cartManager || CartManager.of([]));
   }
 
   private discounts: ReadonlyArray<Discount>;
 
-  private cartItems: CartItems;
+  private cartManager: CartManager;
 
   constructor(
     discounts: ReadonlyArray<Discount>,
-    cartItems: CartItems,
+    cartManager: CartManager,
   ) {
     this.discounts = discounts;
-    this.cartItems = cartItems;
+    this.cartManager = cartManager;
   }
 
   scan(product: Product, quantity = 1): ShoppingCart {
-    const newCartItems = this.cartItems.incrementQuantity(product, quantity);
-    return ShoppingCart.of(this.discounts, newCartItems);
+    const newCartManager = this.cartManager.incrementQuantity(product, quantity);
+    return ShoppingCart.of(this.discounts, newCartManager);
   }
 
   reject(product: Product, quantity = 1): ShoppingCart {
-    const newCartItems = this.cartItems.decrementQuantity(product, quantity);
-    return ShoppingCart.of(this.discounts, newCartItems);
+    const newCartManager = this.cartManager.decrementQuantity(product, quantity);
+    return ShoppingCart.of(this.discounts, newCartManager);
   }
 
   drop(product: Product): ShoppingCart {
-    const newCartItems = this.cartItems.removeProduct(product);
-    return ShoppingCart.of(this.discounts, newCartItems);
+    const newCartManager = this.cartManager.removeProduct(product);
+    return ShoppingCart.of(this.discounts, newCartManager);
   }
 
   empty(): ShoppingCart {
-    return ShoppingCart.of(this.discounts, this.cartItems.empty());
+    return ShoppingCart.of(this.discounts, this.cartManager.empty());
   }
 
   get summary(): Summary {
     return {
-      quantity: this.cartItems.quantity,
-      total: this.cartItems.total,
+      quantity: this.cartManager.quantity,
+      total: this.cartManager.total,
     };
   }
 
   get appliedDiscounts(): ReadonlyArray<AppliedDiscount> {
     return this.discounts.reduce((acc, discount) => {
-      if (!discount.isValid(this.cartItems)) {
+      if (!discount.isValid(this.cartManager)) {
         return acc;
       }
       const appliedDiscount = {
         name: discount.name,
-        quantity: discount.count(this.cartItems),
-        total: discount.calculate(this.cartItems),
+        quantity: discount.count(this.cartManager),
+        total: discount.calculate(this.cartManager),
       };
       return [...acc, appliedDiscount];
     }, [] as ReadonlyArray<AppliedDiscount>);
@@ -86,7 +86,7 @@ class ShoppingCart {
       (acc, appliedDiscount) => acc + appliedDiscount.total.value,
       0,
     );
-    return Money.of(this.cartItems.total.value - discountsAmount);
+    return Money.of(this.cartManager.total.value - discountsAmount);
   }
 }
 

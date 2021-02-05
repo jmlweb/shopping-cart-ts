@@ -1,9 +1,9 @@
-import CartItems from '../CartItems';
+import CartManager from '../CartManager';
 import Money from '../Money';
 
-export type DiscountValidator = (cartItems: CartItems) => boolean;
-export type DiscountCounter = (cartItems: CartItems) => number;
-export type DiscountCalculator = (cartItems: CartItems) => Money;
+export type DiscountValidator = (cartManager: CartManager) => boolean;
+export type DiscountCounter = (cartManager: CartManager) => number;
+export type DiscountCalculator = (cartManager: CartManager) => Money;
 
 type DiscountProps = {
   name: string;
@@ -44,16 +44,16 @@ class Discount {
     this.calculator = calculator;
   }
 
-  isValid(cartItems: CartItems): boolean {
-    return this.validator(cartItems);
+  isValid(cartManager: CartManager): boolean {
+    return this.validator(cartManager);
   }
 
-  count(cartItems: CartItems): number {
-    return this.counter(cartItems);
+  count(cartManager: CartManager): number {
+    return this.counter(cartManager);
   }
 
-  calculate(cartItems: CartItems): Money {
-    return this.calculator(cartItems);
+  calculate(cartManager: CartManager): Money {
+    return this.calculator(cartManager);
   }
 }
 
