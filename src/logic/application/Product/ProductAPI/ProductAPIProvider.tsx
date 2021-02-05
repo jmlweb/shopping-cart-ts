@@ -7,8 +7,10 @@ import ProductAPIContext from './ProductAPIContext';
  * That way, if we need to fetch the info in a different way in the future,
  * we only need to change the resolver in one place
  *
- * We don't want to test the api of react's context and the ProductRepository is already tested
- * That's the reason why we don't want to make unnecesary tests here
+ * There are some reasons why there are no tests:
+ * - The React Context API is already tested by React maintainers.
+ * - The ProductRepository is tested in his module
+ * - TypeScript takes care of semantic errors
  */
 type Props = {
   productRepository: ProductRepository,

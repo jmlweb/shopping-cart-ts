@@ -6,6 +6,13 @@ export interface ProductProps {
   price: number
 }
 
+/**
+ * This could be heavily improved by converting to an Abstract class defining only the needed
+ * properties (code and price).
+ * That way it would be possible to extend the Product class creating specific types of Products
+ * defining their own attributes, but... time is gold :S
+ */
+
 class Product {
   code: string;
 

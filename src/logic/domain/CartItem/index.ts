@@ -1,6 +1,10 @@
 import Product from '../Product';
 import Money from '../Money';
 
+/**
+ * A CartItem represents just a product with a quantity
+ */
+
 class CartItem {
   static of(product: Product, quantity: number): CartItem {
     return new CartItem(product, quantity);

@@ -15,7 +15,7 @@ type DiscountProps = {
 /**
  * The Discount class is agnostic to the implementation.
  * That way, we could fullfill the product team requirements in the future.
- * Let's suppose they want to implement a discount for a product but only in the case
+ * Let's suppose we want to implement a discount for a product but only in the case
  * the cart amount is greather than X.
  * We would just need to create the specific implementation with a proper factory which
  * will return a new Discount implementing the proper rules.

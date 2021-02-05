@@ -8,6 +8,14 @@ type CartManagerProps = {
   total: number;
 };
 
+/**
+ * The CartManager handles a set of CartItems
+ * It is responsible of creating, updating or removing a CartItem from the set when necessary,
+ * as well as emptying the whole set.
+ * Also, it is responsible of representing the data about the set,
+ * like the total number of products included and the total price
+ */
+
 class CartManager {
   static of(cartItems?: ReadonlyArray<CartItem>): CartManager {
     return new CartManager(cartItems);
