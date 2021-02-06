@@ -15,7 +15,7 @@ const INITIAL_VALUE = [
     price: 7.5,
   },
   {
-    code: 'SHIRT',
+    code: 'TSHIRT',
     name: 'Lana T-Shirt',
     price: 20,
   },
@@ -56,7 +56,7 @@ describe('CartManager', () => {
     expect(cartManager4.cartItems.length).toBe(1);
     expect(cartManager4.render()).toEqual([{
       product: {
-        code: 'SHIRT',
+        code: 'TSHIRT',
         name: 'Lana T-Shirt',
         price: 20,
       },

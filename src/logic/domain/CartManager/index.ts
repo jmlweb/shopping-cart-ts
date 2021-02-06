@@ -2,7 +2,7 @@ import CartItem from '../CartItem';
 import Product, { ProductProps } from '../Product';
 import Money from '../Money';
 
-type CartManagerProps = {
+export type CartManagerProps = {
   product: ProductProps;
   quantity: number;
   total: number;

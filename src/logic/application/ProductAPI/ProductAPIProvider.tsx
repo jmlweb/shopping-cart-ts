@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import ProductRepository from '../../../domain/ProductRepository';
+import ProductRepository from '../../domain/ProductRepository';
 import ProductAPIContext from './ProductAPIContext';
 
 /**
