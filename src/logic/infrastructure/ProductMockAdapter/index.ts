@@ -15,7 +15,7 @@ class ProductMockAdapter implements ProductAdapter {
       price: 5 * DECIMAL_PRECISION,
     },
     {
-      code: 'TSHIRT',
+      code: 'SHIRT',
       name: 'Lana T-Shirt',
       price: 20 * DECIMAL_PRECISION,
     },

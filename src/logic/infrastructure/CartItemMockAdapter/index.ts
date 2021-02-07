@@ -13,7 +13,7 @@ class CartItemMockAdapter implements CartItemAdapter {
       quantity: 4,
     },
     {
-      product: 'TSHIRT',
+      product: 'SHIRT',
       quantity: 3,
     },
   ];

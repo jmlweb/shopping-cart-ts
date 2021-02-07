@@ -19,7 +19,7 @@ class DiscountMockAdapter implements DiscountAdapter {
     {
       name: 'mug offer',
       type: 'percent',
-      product: 'TSHIRT',
+      product: 'SHIRT',
       options: {
         discountPercentage: 5,
         minRequired: 3,
