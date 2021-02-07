@@ -1,5 +1,5 @@
 import Discount from '../Discount';
-import CartManager from '../CartManager';
+import CartManager, { CartManagerProps } from '../CartManager';
 import Money from '../Money';
 import Product from '../Product';
 
@@ -67,6 +67,10 @@ class ShoppingCart {
 
   empty(): ShoppingCart {
     return ShoppingCart.of(this.discounts, this.cartManager.empty());
+  }
+
+  get items(): ReadonlyArray<CartManagerProps> {
+    return this.cartManager.render();
   }
 
   get summary(): Summary {
