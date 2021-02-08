@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import AppAPIs from './AppAPIs';
+import AppAPI from './AppAPI';
 import AppQueriesProvider from './AppQueriesProvider';
 import ShoppingCartProvider from '../logic/application/ShoppingCart/ShoppingCartProvider';
 
@@ -14,13 +14,13 @@ import './App.css';
  */
 
 const App: FC = () => (
-  <AppAPIs>
+  <AppAPI>
     <AppQueriesProvider>
       <ShoppingCartProvider>
         <ShoppingCart />
       </ShoppingCartProvider>
     </AppQueriesProvider>
-  </AppAPIs>
+  </AppAPI>
 );
 
 export default App;

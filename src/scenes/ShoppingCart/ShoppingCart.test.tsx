@@ -6,18 +6,18 @@
 import { render, screen } from '@testing-library/react';
 import ShoppingCartProvider from '../../logic/application/ShoppingCart/ShoppingCartProvider';
 import AppQueriesProvider from '../../App/AppQueriesProvider';
-import AppAPIs from '../../App/AppAPIs';
+import AppAPI from '../../App/AppAPI';
 
 import ShoppingCart from '.';
 
 const el = (
-  <AppAPIs>
+  <AppAPI>
     <AppQueriesProvider>
       <ShoppingCartProvider>
         <ShoppingCart />
       </ShoppingCartProvider>
     </AppQueriesProvider>
-  </AppAPIs>
+  </AppAPI>
 );
 
 describe('ShoppingCart', () => {
