@@ -1,10 +1,13 @@
 import { FC } from 'react';
+import { ThemeProvider } from 'styled-components';
+
 import AppAPI from './AppAPI';
 import AppQueriesProvider from './AppQueriesProvider';
 import ShoppingCartProvider from '../logic/application/ShoppingCart/ShoppingCartProvider';
-
-import ShoppingCart from '../scenes/ShoppingCart';
-import './App.css';
+import Scenes from '../scenes';
+import BaseStyles from '../components/BaseStyles';
+import theme from '../theme';
+// import './App.css';
 
 /**
  * NOTES:
@@ -14,13 +17,18 @@ import './App.css';
  */
 
 const App: FC = () => (
-  <AppAPI>
-    <AppQueriesProvider>
-      <ShoppingCartProvider>
-        <ShoppingCart />
-      </ShoppingCartProvider>
-    </AppQueriesProvider>
-  </AppAPI>
+  <ThemeProvider theme={theme}>
+    <>
+      <BaseStyles />
+      <AppAPI>
+        <AppQueriesProvider>
+          <ShoppingCartProvider>
+            <Scenes />
+          </ShoppingCartProvider>
+        </AppQueriesProvider>
+      </AppAPI>
+    </>
+  </ThemeProvider>
 );
 
 export default App;

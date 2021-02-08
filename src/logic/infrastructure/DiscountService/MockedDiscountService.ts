@@ -10,12 +10,12 @@ type ProductsMap = {
 
 const DISCOUNTS = [
   {
-    name: '2x1 cap offer',
+    name: '2x1 Cap offer',
     type: 'twoPerOne',
     product: 'CAP',
   },
   {
-    name: 'shirt offer',
+    name: 'Shirt offer',
     type: 'percent',
     product: 'SHIRT',
     options: {

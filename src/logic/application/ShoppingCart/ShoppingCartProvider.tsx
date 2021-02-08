@@ -22,8 +22,8 @@ const ShoppingCartProvider: FC<Props> = ({
   const api = useAPI();
   const [shoppingCart, setShoppingCart] = useState(() => ShoppingCart.of(discounts, cartManager));
 
-  // The reason for not relying on the current store for the product list is that
-  // it may have changed (ex: pagination)
+  // The reason for not relying on the current store for the product list to retrieve
+  // the product details is that it may have changed (ex: pagination)
   const scan = useCallback(
     async (code: string, quantity = 1) => {
       const product = await api.product.get(code);
