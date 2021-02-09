@@ -40,9 +40,9 @@ type Props = {
 
 const Counter: FC<Props> = ({ value, onScan, onReject }) => (
   <CounterWrapper>
-    <CounterButton onClick={onScan}>+</CounterButton>
+    <CounterButton onClick={onScan} data-testid="checkoutScan">+</CounterButton>
     <CounterInput value={value} readOnly />
-    <CounterButton onClick={onReject}>-</CounterButton>
+    <CounterButton onClick={onReject} data-testid="checkoutReject">-</CounterButton>
   </CounterWrapper>
 );
 

@@ -33,7 +33,7 @@ const ProductsTableContent: FC = () => {
   return (
     <ProductsTableWrapper $isHeader={false}>
       {items.map((item) => (
-        <ProductTableRow key={item.product.code}>
+        <ProductTableRow key={item.product.code} data-testid="checkoutProductRow">
           <ProductInfo name={item.product.name} code={item.product.code} image={`/img/${item.product.code.toLowerCase()}.png`} />
           <ProductTableCenteredCol>
             <Counter
