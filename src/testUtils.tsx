@@ -1,6 +1,7 @@
 import { FC, ReactElement } from 'react';
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
+import { MemoryRouter } from 'react-router-dom';
 
 import theme from './theme';
 import ShoppingCartProvider from './logic/application/ShoppingCart/ShoppingCartProvider';
@@ -11,7 +12,11 @@ const AllTheProviders: FC = ({ children }) => (
   <ThemeProvider theme={theme}>
     <AppAPI>
       <AppQueriesProvider>
-        <ShoppingCartProvider>{children}</ShoppingCartProvider>
+        <ShoppingCartProvider>
+          <MemoryRouter>
+            {children}
+          </MemoryRouter>
+        </ShoppingCartProvider>
       </AppQueriesProvider>
     </AppAPI>
   </ThemeProvider>
