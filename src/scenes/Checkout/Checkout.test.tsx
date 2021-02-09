@@ -63,8 +63,17 @@ describe('ShoppingCart', () => {
     const button = within(rows[0]).getByTestId('checkoutReject');
     await act(async () => {
       await fireEvent.click(button);
+    });
+    expect(await screen.findByText(/10 Items/i)).toBeInTheDocument();
+    await act(async () => {
       await fireEvent.click(button);
+    });
+    expect(await screen.findByText(/9 Items/i)).toBeInTheDocument();
+    await act(async () => {
       await fireEvent.click(button);
+    });
+    expect(await screen.findByText(/8 Items/i)).toBeInTheDocument();
+    await act(async () => {
       await fireEvent.click(button);
     });
     expect(await screen.findByText(/7 Items/i)).toBeInTheDocument();
