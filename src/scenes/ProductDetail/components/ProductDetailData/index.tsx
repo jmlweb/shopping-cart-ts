@@ -1,8 +1,11 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
+import Product from '../../../../logic/domain/Product';
 import Title from '../../../../components/Title';
 import ActionButton from '../../../../components/ActionButton';
+import useShoppingCart from '../../../../logic/application/ShoppingCart/useShoppingCart';
 
 const ProductDetailDataWrapper = styled.div`
   background: #fff;
@@ -40,23 +43,42 @@ const ProductCode = styled.p`
   padding-bottom: 32px;
 `;
 
-const ProductDetailData: FC = () => (
-  <ProductDetailDataWrapper>
-    <div>
-      <ProductDetailTitle>
-        <span>Shirt</span>
-        <span>20€</span>
-      </ProductDetailTitle>
-      <ProductDetailDescription>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales
-        semper elit sit amet interdum. Praesent volutpat sed elit vel
-        consectetur. Nulla tempus tincidunt ex, sit amet semper ipsum imperdiet
-        varius. In rutrum aliquam nisl, sagittis faucibus felis bibendum id.
-      </ProductDetailDescription>
-      <ProductCode>Product code: SHIRT</ProductCode>
-      <ActionButton>Add to cart</ActionButton>
-    </div>
-  </ProductDetailDataWrapper>
-);
+type Props = {
+  product: Product;
+};
+
+const ProductDetailData: FC<Props> = ({ product }) => {
+  const history = useHistory();
+  const { scan } = useShoppingCart();
+  const handleClick = () => {
+    scan(product.code);
+    history.push('/');
+  };
+  return (
+    <ProductDetailDataWrapper>
+      <div>
+        <ProductDetailTitle>
+          <span>{product.name}</span>
+          <span>
+            {product.price.formattedValue}
+            €
+          </span>
+        </ProductDetailTitle>
+        <ProductDetailDescription>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales
+          semper elit sit amet interdum. Praesent volutpat sed elit vel
+          consectetur. Nulla tempus tincidunt ex, sit amet semper ipsum imperdiet
+          varius. In rutrum aliquam nisl, sagittis faucibus felis bibendum id.
+        </ProductDetailDescription>
+        <ProductCode>
+          Product code:
+          {' '}
+          {product.code}
+        </ProductCode>
+        <ActionButton onClick={handleClick}>Add to cart</ActionButton>
+      </div>
+    </ProductDetailDataWrapper>
+  );
+};
 
 export default ProductDetailData;
