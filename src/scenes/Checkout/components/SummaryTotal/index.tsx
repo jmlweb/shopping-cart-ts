@@ -44,7 +44,7 @@ const SummaryTotal: FC = () => {
       <SummaryTotalList>
         <SummaryTotalItem>
           <SummaryTotalDescription>Total cost</SummaryTotalDescription>
-          <SummaryTotalAmount>
+          <SummaryTotalAmount data-testid="checkoutTotalAmount">
             {total}
             €
           </SummaryTotalAmount>

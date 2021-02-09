@@ -45,9 +45,13 @@ const AppliedDiscounts: FC = () => {
         {appliedDiscounts.map((appliedDiscount) => (
           <AppliedDiscountsItem key={appliedDiscount.name}>
             <span>
-              x
-              {appliedDiscount.quantity}
-              {' '}
+              {appliedDiscount.quantity > 1 && (
+                <>
+                  x
+                  {appliedDiscount.quantity}
+                  {' '}
+                </>
+              )}
               {appliedDiscount.name}
             </span>
             <AppliedDiscountsAmount>
