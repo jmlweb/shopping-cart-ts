@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const ProductInfoWrapper = styled.figure`
   display: flex;
@@ -11,14 +12,17 @@ const ProductInfoImg = styled.img`
   margin-right: 16px;
   width: 72px;
   height: 72px;
-  border: ${({ theme }) => theme.colors.darkBorder};
+  border: 1px solid ${({ theme }) => theme.colors.darkBorder};
   border-radius: 4px;
 `;
 
 const ProductInfoTitle = styled.h1`
   font-size: 16px;
   line-height: 24px;
-  color: ${({ theme }) => theme.colors.primary};
+`;
+
+const ProductInfoLink = styled(Link)`
+    color: ${({ theme }) => theme.colors.primary};
 `;
 
 const ProductInfoCode = styled.p`
@@ -37,9 +41,13 @@ type Props = {
 
 const ProductInfo: FC<Props> = ({ name, image, code }) => (
   <ProductInfoWrapper>
-    <ProductInfoImg src={image} alt={code} />
+    <Link to={`/product/${code}`}><ProductInfoImg src={image} alt={code} /></Link>
     <div>
-      <ProductInfoTitle>{name}</ProductInfoTitle>
+      <ProductInfoTitle>
+        <ProductInfoLink to={`/product/${code}`}>
+          {name}
+        </ProductInfoLink>
+      </ProductInfoTitle>
       <ProductInfoCode>
         Product code
         {' '}

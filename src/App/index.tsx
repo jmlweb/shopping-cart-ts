@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 
 import AppAPI from './AppAPI';
 import AppQueriesProvider from './AppQueriesProvider';
@@ -23,7 +24,9 @@ const App: FC = () => (
       <AppAPI>
         <AppQueriesProvider>
           <ShoppingCartProvider>
-            <Scenes />
+            <BrowserRouter>
+              <Scenes />
+            </BrowserRouter>
           </ShoppingCartProvider>
         </AppQueriesProvider>
       </AppAPI>

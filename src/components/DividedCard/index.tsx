@@ -1,9 +1,10 @@
 import { Children, FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
-const SDividedCard = styled.div`
+const DividedCardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1fr);
+  position: relative;
   @media(min-width: 900px) {
     grid-template-columns: ${({ theme }) => `1fr ${theme.sizes.column}`};
     min-height: 648px;
@@ -21,10 +22,10 @@ type Props = {
  */
 
 const DividedCard: FC<Props> = ({ mainContent, auxContent }) => (
-  <SDividedCard>
+  <DividedCardWrapper>
     {Children.only(mainContent)}
     {Children.only(auxContent)}
-  </SDividedCard>
+  </DividedCardWrapper>
 );
 
 export default DividedCard;
